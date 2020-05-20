@@ -3,6 +3,7 @@ package dbops
 import (
 	"database/sql"
 	"github.com/zhangatle/video_server/api/defs"
+	"github.com/zhangatle/video_server/api/utils"
 	"log"
 	"time"
 )
@@ -50,7 +51,7 @@ func DeleteUser(loginName string, pwd string) error {
 }
 
 func AddNewVideo(aid int, name string) (*defs.VideoInfo, error) {
-	vid, err := utils.newUUID()
+	vid, err := utils.NewUUID()
 	if err != nil {
 		return nil, err
 	}

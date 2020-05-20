@@ -1,6 +1,8 @@
 package session
 
 import (
+	"github.com/zhangatle/video_server/api/dbops"
+	"github.com/zhangatle/video_server/api/defs"
 	"sync"
 	"time"
 )
@@ -26,7 +28,7 @@ func loadSessionsFromDB()  {
 		return
 	}
 	r.Range(func(k, v interface{}) bool {
-		ss := v.(*.defs.SimpleSession)
+		ss := v.(*defs.SimpleSession)
 		sessionMap.Store(k, ss)
 		return true
 	})
