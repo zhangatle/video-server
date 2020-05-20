@@ -3,6 +3,7 @@ package session
 import (
 	"github.com/zhangatle/video_server/api/dbops"
 	"github.com/zhangatle/video_server/api/defs"
+	"github.com/zhangatle/video_server/api/utils"
 	"sync"
 	"time"
 )
@@ -32,4 +33,27 @@ func loadSessionsFromDB()  {
 		sessionMap.Store(k, ss)
 		return true
 	})
+}
+
+func GenerateNewSessionId(un string) string {
+	id, _ := utils.NewUUID()
+	ct := nowInMilli()
+	ttl := ct + 30 * 60 *1000
+	ss := &defs.SimpleSession{Username: un, TTL: ttl}
+	sessionMap.Store(id, ss)
+	dbops.InsertSession(id, ttl, un)
+	return id
+}
+
+func IsSessionExpired(sid string) (string, bool) {
+	ss, ok := sessionMap.Load(sid)
+	if ok {
+		ct := nowInMilli()
+		if ss.(*defs.SimpleSession).TTL < ct {
+			deleteExpiredSession(sid)
+			return "", true
+		}
+		return ss.(*defs.SimpleSession).Username, false
+	}
+	return "", true
 }
