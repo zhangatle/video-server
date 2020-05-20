@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/zhangatle/video_server/api/defs"
+	"github.com/zhangatle/video_server/api/session"
 	"net/http"
 )
 
