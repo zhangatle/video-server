@@ -25,7 +25,7 @@ func TestMain(m *testing.M)  {
 func TestUserWorkFlow(t *testing.T) {
 	t.Run("Add", testAddUser)
 	t.Run("Get", testGetUser)
-	t.Run("Del", TestDeleteUser)
+	t.Run("Del", testDeleteUser)
 	t.Run("Reget", testRegetUser)
 }
 
@@ -43,7 +43,7 @@ func testGetUser(t *testing.T)  {
 	}
 }
 
-func TestDeleteUser(t *testing.T) {
+func testDeleteUser(t *testing.T) {
 	err := DeleteUser("zhangsan", "123")
 	if err != nil {
 		t.Errorf("Error of DeleteUser: %v", err)
@@ -65,8 +65,8 @@ func TestVideoWorkFlow(t *testing.T) {
 	t.Run("PrepareUser", testAddUser)
 	t.Run("AddVideo", testAddVideoInfo)
 	t.Run("GetVideo", testGetVideoInfo)
-	//t.Run("DelVideo", testDeleteVideoInfo)
-	//t.Run("RegetVideo", testRegetVideoInfo)
+	t.Run("DelVideo", testDeleteVideoInfo)
+	t.Run("RegetVideo", testRegetVideoInfo)
 }
 
 func testAddVideoInfo(t *testing.T) {
@@ -98,12 +98,12 @@ func testRegetVideoInfo(t *testing.T) {
 	}
 }
 
-//func TestComments(t *testing.T) {
-//	clearTables()
-//	t.Run("AddUser", testAddUser)
-//	t.Run("AddComments", testAddComments)
-//	t.Run("ListComments", testListComments)
-//}
+func TestComments(t *testing.T) {
+	clearTables()
+	t.Run("AddUser", testAddUser)
+	t.Run("AddComments", testAddComments)
+	t.Run("ListComments", testListComments)
+}
 
 func testAddComments(t *testing.T) {
 	vid := "12345"
