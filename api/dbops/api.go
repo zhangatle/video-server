@@ -56,8 +56,13 @@ func AddNewVideo(aid int, name string) (*defs.VideoInfo, error) {
 		return nil, err
 	}
 	t := time.Now()
-	ctime := t.Format("Jan 02 2006, 10:00:00")
+	// go语言的彩蛋，时间必须是以下这个
+	ctime := t.Format("Jan 02 2006, 15:04:05")
 	stmtIns, err := dbConn.Prepare(`INSERT INFO video_info(id, author_id, name, display_ctime) VALUES(?, ?, ?, ?)`)
+	if err != nil {
+		return nil, err
+	}
+	_, err = stmtIns.Exec(vid, aid, name, ctime)
 	if err != nil {
 		return nil, err
 	}
