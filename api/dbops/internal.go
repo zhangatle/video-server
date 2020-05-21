@@ -1,9 +1,11 @@
 package dbops
 
 import (
+	"database/sql"
 	"github.com/zhangatle/video_server/api/defs"
 	"log"
 	"strconv"
+	"sync"
 )
 
 func DeleteSession(sid string) error  {
