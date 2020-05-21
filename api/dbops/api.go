@@ -119,7 +119,7 @@ func AddNewComments(vid string, aid int, content string) error {
 	return nil
 }
 
-func listComments(vid string, from, to int) ([]*defs.Comment, error) {
+func ListComments(vid string, from, to int) ([]*defs.Comment, error) {
 	stmtOut, err := dbConn.Prepare(` SELECT comments.id, users.Login_name, comments.content FROM comments
 		INNER JOIN users ON comments.author_id = users.id
 		WHERE comments.video_id = ? AND comments.time > FROM_UNIXTIME(?) AND comments.time <= FROM_UNIXTIME(?)`)
