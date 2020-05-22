@@ -2,7 +2,7 @@ package taskrunner
 
 import (
 	"errors"
-	"github.com/zhangatle/video_server/api/dbops"
+	"github.com/zhangatle/video_server/scheduler/dbops"
 	"log"
 	"os"
 	"sync"
