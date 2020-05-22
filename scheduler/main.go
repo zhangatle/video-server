@@ -2,12 +2,13 @@ package main
 
 import (
 	"github.com/julienschmidt/httprouter"
+	"github.com/zhangatle/video_server/scheduler/taskrunner"
 	"net/http"
 )
 
 func RegisterHandlers() *httprouter.Router {
 	router := httprouter.New()
-	router.GET("/video-delete-record/:vid-id", vidDelREcHandler)
+	router.GET("/video-delete-record/:vid-id", vidDelRecHandler)
 	return router
 }
 
