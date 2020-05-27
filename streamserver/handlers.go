@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func testPageHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params)  {
+func testPageHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	t, _ := template.ParseFiles("./videos/upload.html")
 	t.Execute(w, nil)
 }
@@ -36,7 +36,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 		sendErrorResponse(w, http.StatusBadRequest, "File is too big")
 		return
 	}
-	file, _ , err := r.FormFile("file")
+	file, _, err := r.FormFile("file")
 	if err != nil {
 		log.Printf("Error when try to get file: %v", err)
 		sendErrorResponse(w, http.StatusInternalServerError, "Internal Error")
@@ -49,7 +49,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 		return
 	}
 	fn := p.ByName("vid-id")
-	err = ioutil.WriteFile(VIDEO_DIR + fn, data, 0666)
+	err = ioutil.WriteFile(VIDEO_DIR+fn, data, 0666)
 	if err != nil {
 		log.Printf("Write file error: %v", err)
 		sendErrorResponse(w, http.StatusInternalServerError, "Internal Error")

@@ -14,20 +14,20 @@ func (m middleWareHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	m.r.ServeHTTP(w, r)
 }
 
-func NewMiddleWareHandler(r *httprouter.Router) http.Handler  {
+func NewMiddleWareHandler(r *httprouter.Router) http.Handler {
 	m := middleWareHandler{}
 	m.r = r
 	return m
 }
 
-func RegisterHandlers() *httprouter.Router  {
+func RegisterHandlers() *httprouter.Router {
 	router := httprouter.New()
 	router.POST("/user", CreateUser)
 	router.POST("/user/:username", Login)
 	return router
 }
 
-func main()  {
+func main() {
 	r := RegisterHandlers()
 	mh := NewMiddleWareHandler(r)
 	http.ListenAndServe(":8000", mh)

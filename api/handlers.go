@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params)  {
+func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	res, _ := ioutil.ReadAll(r.Body)
 	ubody := &defs.UserCredential{}
 	if err := json.Unmarshal(res, ubody); err != nil {
@@ -25,7 +25,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params)  {
 	io.WriteString(w, "Create User Handler")
 }
 
-func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params)  {
+func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	uname := p.ByName("username")
 	io.WriteString(w, uname)
 }

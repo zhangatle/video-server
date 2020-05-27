@@ -12,7 +12,7 @@ func RegisterHandlers() *httprouter.Router {
 	return router
 }
 
-func main()  {
+func main() {
 	go taskrunner.Start()
 	r := RegisterHandlers()
 	http.ListenAndServe(":9001", r)

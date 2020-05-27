@@ -10,7 +10,7 @@ type middleWareHandler struct {
 	l *ConnLimiter
 }
 
-func NewMiddleWareHandler(r *httprouter.Router, cc int) http.Handler  {
+func NewMiddleWareHandler(r *httprouter.Router, cc int) http.Handler {
 	m := middleWareHandler{}
 	m.r = r
 	m.l = NewConnLimiter(cc)
@@ -25,7 +25,7 @@ func RegisterHandlers() *httprouter.Router {
 	return router
 }
 
-func (m middleWareHandler) ServeHTTP(w http.ResponseWriter, r *http.Request)  {
+func (m middleWareHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if !m.l.GetConn() {
 		sendErrorResponse(w, http.StatusTooManyRequests, "Too many requests")
 		return
